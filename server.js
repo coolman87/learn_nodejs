@@ -6,8 +6,8 @@ function start(router, handler) {
         
         var pathname = url.parse(request.url).pathname;
         response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end(router(pathname, handler));
-        
+        router(pathname, handler, response);
+
     }).listen(8888);
 
     console.log('your server started in 8888');

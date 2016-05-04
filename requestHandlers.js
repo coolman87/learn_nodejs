@@ -1,12 +1,14 @@
+var exec = require('child_process').exec;
+
 var handlers = {
-    start: function () {
-        return 'start';
+    start: function (resp) {
+        exec("ls -lah", function (error, stdout, stderr) {
+            resp.writeHead(200, {"Content-Type": "text/plain"});
+            resp.end(stdout);
+        });
     },
-    upload: function () {
-        return 'upload files';
-    },
-    news: function () {
-        return 'news list';
+    upload: function (rep) {
+        rep.end('upload files');
     }
 };
 

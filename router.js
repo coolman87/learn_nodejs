@@ -1,10 +1,12 @@
-function router(pathname, handler) {
+function router(pathname, handler, response) {
 
     if (typeof handler[pathname] !== 'function') {
-        return 'is not correct path';
+        response.writeHead(404, {"Content-Type": "text/plain"});
+        response.end("404 Not found");
+        return;
     }
-    
-    return handler[pathname]();
+
+    handler[pathname](response);
 }
 
 module.exports = router;
