@@ -1,4 +1,4 @@
-function router(pathname, handler, response) {
+function router(pathname, handler, response, postData) {
 
     if (typeof handler[pathname] !== 'function') {
         response.writeHead(404, {"Content-Type": "text/plain"});
@@ -6,7 +6,7 @@ function router(pathname, handler, response) {
         return;
     }
 
-    handler[pathname](response);
+    handler[pathname](response, postData);
 }
 
 module.exports = router;

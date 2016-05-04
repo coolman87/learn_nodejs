@@ -3,10 +3,17 @@ var url = require('url'),
 
 function start(router, handler) {
     http.createServer(function (request, response) {
-        
         var pathname = url.parse(request.url).pathname;
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        router(pathname, handler, response);
+        var postData = "";
+        request.setEncoding("utf8");
+
+        request.addListener('data', function (postDataChunk) {
+            postData += postDataChunk;
+        });
+
+        request.addListener('end', function () {
+            router(pathname, handler, response, postData);
+        });
 
     }).listen(8888);
 

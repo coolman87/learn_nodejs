@@ -5,6 +5,7 @@ var server = require('./server'),
 var handler = {
     '/': requestHandlers.start,
     '/start': requestHandlers.start,
+    '/exec': requestHandlers.exec,
     '/upload': requestHandlers.upload
 };
 
